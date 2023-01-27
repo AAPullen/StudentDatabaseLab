@@ -44,14 +44,44 @@ string[] favoriteFood = new string[]
 
 Console.Write("Welcome! ");
 
-
+bool isValidAnswer = false;
 bool loop = true;
+string answer = null;
 do
 {
-    string answer = null;
-    bool isValidAnswer = false;
+    answer = null;
+    isValidAnswer = false;
+    do
+    { 
+        Console.Write("Would you like to see a list of our students?\n" +
+           "Enter \"y\" for yes or \"n\" for no: ");
 
-    Console.Write("Which student would you like to know more about?\n" +
+        answer = Console.ReadLine();
+
+        isValidAnswer = StudentDatabaseClass.isValidAnswer(answer);
+
+        if (isValidAnswer == false)
+        {
+            Console.WriteLine("\nI'm sorry, that is not a valid response.\n");
+        }
+
+    } while (isValidAnswer == false);
+
+    if (answer == "y")
+    {
+    Console.WriteLine();
+        for (int i = 0; i < name.Length; i++)
+        {
+        Console.WriteLine($"{i + 1} {name[i]}");
+        }
+    Console.WriteLine();
+}
+else
+{
+    Console.WriteLine("\nAlright.\n");
+}
+
+Console.Write("Which student would you like to know more about?\n" +
         $"Enter a number 1-{name.Length}: ");
 
     string userStudent = Console.ReadLine();
@@ -119,47 +149,12 @@ do
         }
         else
         {
-            //Console.WriteLine("\nI'm Sorry, that is not a valid selection\n");
-            break;
+            Console.WriteLine("\nI'm Sorry, that is not a valid selection\n");
         }
     }
     else
     {
         Console.WriteLine("\nI'm sorry, that is not a valid selection\n");
-        Console.WriteLine("test");
-    }
-
-    if (loop == true)
-    {
-        do
-        {
-            Console.Write("Would you like to see a list of our students?\n" +
-                "Enter \"y\" for yes or \"n\" for no: ");
-
-            answer = Console.ReadLine();
-
-            isValidAnswer = StudentDatabaseClass.isValidAnswer(answer);
-
-            if (isValidAnswer == false)
-            {
-                Console.WriteLine("\nI'm sorry, that is not a valid response.\n");
-            }
-
-        } while (isValidAnswer == false);
-
-        if (answer == "y")
-        {
-            Console.WriteLine();
-            for (int i = 0; i < name.Length; i++)
-            {
-                Console.WriteLine($"{i + 1} {name[i]}");
-            }
-            Console.WriteLine();
-        }
-        else
-        {
-            Console.WriteLine();
-        }
     }
 
 } while (loop == true);
