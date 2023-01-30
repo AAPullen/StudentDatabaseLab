@@ -44,19 +44,17 @@ string[] favoriteFood = new string[]
 
 Console.Write("Welcome! ");
 
-bool isValidAnswer = false;
 bool loop = true;
-string answer = null;
 do
 {
-    answer = null;
-    isValidAnswer = false;
+    string answer = null;
+    bool isValidAnswer = false;
     do
     { 
         Console.Write("Would you like to see a list of our students?\n" +
            "Enter \"y\" for yes or \"n\" for no: ");
 
-        answer = Console.ReadLine();
+        answer = Console.ReadLine().ToLower().Trim();
 
         isValidAnswer = StudentDatabaseClass.isValidAnswer(answer);
 
@@ -82,9 +80,11 @@ else
 }
 
 Console.Write("Which student would you like to know more about?\n" +
-        $"Enter a number 1-{name.Length}: ");
+        $"Enter the student's name or a number from 1-{name.Length}: ");
 
-    string userStudent = Console.ReadLine();
+    string userStudent = Console.ReadLine().ToLower().Trim();
+    userStudent = StudentDatabaseClass.CheckName(userStudent);
+
 
     if (int.TryParse(userStudent, out int student))
     {
